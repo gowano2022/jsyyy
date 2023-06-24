@@ -3,7 +3,7 @@
     "start": "node server.js"
   },
   "routes": {
-    "/": "src/routes/index.js",
-    "/send-email": "src/routes/email.js"
+    "/": "/routes/index.js",
+    "/send-email": "/routes/email.js"
   }
 }
