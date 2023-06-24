@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Random Number Email</title>
-  <script src="script.js"></script>
+	<title>Random Number Generator</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+	</style>
 </head>
 <body>
-  <h1 id="randomNumber">Loading...</h1>
+	<h1>Random Number Generator</h1>
+	<p>Click the button below to generate a random number and send it to your email address:</p>
+	<button id="generate-btn">Generate and Send</button>
+	<div id="message"></div>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#generate-btn').click(function() {
+				$.ajax({
+					url: '/generate-number',
+					method: 'POST',
+					success: function(response) {
+						$('#message').text(response);
+					},
+					error: function(xhr, status, error) {
+						console.error(error);
+						$('#message').text('An error occurred. Please try again later.');
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>
