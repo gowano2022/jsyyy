@@ -1,9 +1,0 @@
-{
-  "scripts": {
-    "start": "node server.js"
-  },
-  "routes": {
-    "/": "/routes/index.js",
-    "/send-email": "/routes/email.js"
-  }
-}
