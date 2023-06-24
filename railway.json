@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "start": "node server.js"
+  },
+  "routes": {
+    "/send-email": "src/emailHandler.js"
+  }
+}
