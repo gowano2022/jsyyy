@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Send Random Number to Gmail</title>
+	<title>Random Number Generator</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+	</style>
 </head>
 <body>
-  <button onclick="sendRandomNumber()">Send Random Number</button>
+	<h1>Random Number Generator</h1>
+	<p>Click the button below to generate a random number and send it to your email address:</p>
+	<button id="generate-btn">Generate and Send</button>
+	<div id="message"></div>
 
-  <script>
-    function sendRandomNumber() {
-      // Generate a random number
-      var randomNumber = Math.floor(Math.random() * 100);
-
-      // Send the random number to the server
-      fetch('/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ number: randomNumber })
-      })
-      .then(function(response) {
-        if (response.ok) {
-          alert('Email sent successfully!');
-        } else {
-          alert('Failed to send email.');
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-        alert('An error occurred.');
-      });
-    }
-  </script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#generate-btn').click(function() {
+				$.ajax({
+					url: '/generate-number',
+					method: 'POST',
+					data: {
+						email: $('#email-input').val()
+					},
+					success: function(response) {
+						$('#message').text(response);
+					},
+					error: function(xhr, status, error) {
+						console.error(error);
+						$('#message').text('An error occurred. Please try again later.');
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>
